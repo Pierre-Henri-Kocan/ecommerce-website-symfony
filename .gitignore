@@ -1,3 +1,6 @@
+src/.DS_Store
+config/.DS_Store
+.DS_Store
 
 ###> symfony/framework-bundle ###
 /.env.local
@@ -18,6 +21,4 @@
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
-src/.DS_Store
-config/.DS_Store
-.DS_Store
+
