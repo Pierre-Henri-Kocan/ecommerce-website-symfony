@@ -22,4 +22,3 @@ config/.DS_Store
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
-
