@@ -1,0 +1,7 @@
+<div class="container">
+    <h1>Activer votre compte</h1>
+    <p>Bonjour {{ user.firstname }}</p>
+    <p>Votre inscription sur le site Kommercial est à valider en cliquant sur le lien ci-dessous :</p>
+    <p><a href="{{ absolute_url(path('verify_user', {token: token})) }}">Lien</a></p>
+    <p>Ce lien expirera dans 10 minutes</p>
+</div>
