@@ -21,9 +21,6 @@ class Category
     #[ORM\Column(length: 100)]
     private ?string $name = null;
 
-    #[ORM\Column]
-    private ?int $categoryOrder = null;
-
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'categories')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?self $parent = null;
@@ -33,6 +30,9 @@ class Category
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Product::class)]
     private Collection $products;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $categoryOrder = null;
 
     public function __construct()
     {
@@ -53,18 +53,6 @@ class Category
     public function setName(string $name): static
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getCategoryOrder(): ?int
-    {
-        return $this->categoryOrder;
-    }
-
-    public function setCategoryOrder(int $categoryOrder): static
-    {
-        $this->categoryOrder = $categoryOrder;
 
         return $this;
     }
@@ -137,6 +125,18 @@ class Category
                 $product->setCategory(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCategoryOrder(): ?int
+    {
+        return $this->categoryOrder;
+    }
+
+    public function setCategoryOrder(?int $categoryOrder): static
+    {
+        $this->categoryOrder = $categoryOrder;
 
         return $this;
     }
