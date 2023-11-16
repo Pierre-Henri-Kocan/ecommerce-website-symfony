@@ -14,10 +14,23 @@
     
     <body>
         {% include "_includes/_header.html.twig" %}
+        {% if app.user and app.user.isVerified == false %}
+        <div class="container mt-3">
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <div class="alert-message">
+                    <strong>Votre compte n'est pas activé</strong>, renvoyer le lien d'activation
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        {% include "_includes/_flash.html.twig" %}
+
         {% block body %}{% endblock %}
+
         {# {% include "_includes/_footer.html.twig" %} #}
     </body>
-
     <!-- Fichiers JS -->
         <script src="{{ asset('js/bootstrap.bundle.min.js') }}" defer></script>
         {% block javascripts %}{% endblock %}
