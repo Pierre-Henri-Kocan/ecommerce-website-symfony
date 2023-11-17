@@ -3,11 +3,47 @@
 {% block title %}{{ product.name }}{% endblock %}
 
 {% block body %}
-<section class="container  my-3">
+<section class="container my-3">
     <div class="row">
-        <div class="col">
+        <div class="col-12">
             <h1 class="h3 mb-3 font-weight-normal">{{ product.name }}</h1>
+        </div>
+        <div class="col-6">
+            <div id="carouselExampleIndicators" class="carousel slide">
+                <div class="carousel-indicators">
+                    {% for iteration in 1..product.images|length %}
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ iteration - 1 }}" {{ (loop.first ) ?'class="active" aria-current="true"' : '' }} aria-label="Slide {{ iteration }}"></button>
+                    {% endfor %}
+                </div>
+                <div class="carousel-inner">
+                {% for image in product.images %}
+                    <div class="carousel-item {{ (loop.first ) ? 'active' : '' }}">
+                        <img src="{{ asset('uploads/') ~ image.name }}" class="d-block w-100" alt="{{ product.name }}">
+                    </div>
+                {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+
+        </div>
+        <div class="col-6">
             <p>{{ product.description }}</p>
+            <p>Catégorie : {{ product.category.name }}</p>
+            <p>Prix : {{ product.price / 100 }} $</p>
+            {% if product.stock > 0 %}
+                <a href="#" class="btn btn-success">Ajouter au panier</a>
+            {% else %}
+                <p class="text-danger">Rupture de stock</p>
+            {% endif %}
+            
+
         </div>
     </div>
 </section>
